@@ -1,0 +1,13 @@
+# -*- coding: cp1254 -*-
+
+from determinant import *
+
+while True:
+    A = Matris.readStdin(True)
+    print  A,
+    print " det(A) = ", det(A)
+
+    answer = raw_input('Yeni bir determinant hesabý yapmak için "D"(Devam) yazýp entera basýnýz...')
+
+    if answer != ( "D" or "Devam" or "d" or "devam" ): break
+            
