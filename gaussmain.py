@@ -7,6 +7,11 @@ sabitler = Matris.readStdin(False)
 
 cozumkumesi = gauss_elemination(katsayilar, sabitler)
 
-for i in range(len(cozumkumesi)):
-        var = "x" + str(i+1)
-        print var, " = ", cozumkumesi[i]
+if cozumkumesi == True:
+        print "Denklem sisteminin ", rankKatsayilar - rankSabitler, " parametreye baðlý sonsuz çözümü vardýr."
+elif cozumkumesi == False:
+        print "Denklem sisteminin çözüm kümesi boþ kümedir."
+else:
+        for i in range(len(cozumkumesi)):
+                var = "x" + str(i+1)
+                print var, " = ", cozumkumesi[i]

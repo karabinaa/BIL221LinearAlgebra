@@ -5,7 +5,7 @@ from determinant import *
 import copy
 from fractions import Fraction
 
-def elementercarpma(satir, sayi):
+def satircarpma(satir, sayi):
     ysatir = []
     for i in range(len(satir)):
         ysatir.append(satir[i] * sayi)
@@ -23,24 +23,39 @@ def ekMatrisOlustur(katsayilar, sabitler):
 
 def indirge(matris):
     for i in range(matris.m):
-        temp = elementercarpma(copy.deepcopy(matris[i]), Fraction(1,matris[i][i])) 
+        temp = satircarpma(copy.deepcopy(matris[i]), Fraction(1,matris[i][i])) 
         for j in range(i+1, matris.m):
-            matris = elementercikarma(matris, j, elementercarpma(temp, matris[j][i]))
+            matris = elementercikarma(matris, j, satircarpma(temp, matris[j][i]))
     return matris
     
 
 def gauss_elemination(katsayilar, sabitler):
     cozumkumesi = ["unknwn"]*katsayilar.m
     indirgenmis = indirge(ekMatrisOlustur(katsayilar, sabitler))
+    rankKatsayilar = 0
+    rankSabitler = 0
     
-    for i in range(1,katsayilar.m+1):
-        for j in range(1, katsayilar.m+1):
-            if (cozumkumesi[-j] != "unknwn"):
-                indirgenmis[-i][-1] -= indirgenmis[-i][-j-1]*cozumkumesi[-j]
-        if indirgenmis[-i][-i-1] != 0:
-            cozumkumesi[-i] = indirgenmis[-i][-1]/indirgenmis[-i][-i-1]
+    for i in range(katsayilar.m):
+        if 0 not in indirgenmis[i][:katsayilar.m]:
+            rankKatsayilar +=1
+        if 0 != indirgenmis[i][-1]:
+            rankSabitler +=1
 
-    return cozumkumesi
+    if rankKatsayilar == rankSabitler:
+        for i in range(1,katsayilar.m+1):
+            for j in range(1, katsayilar.m+1):
+                if (cozumkumesi[-j] != "unknwn"):
+                    indirgenmis[-i][-1] -= indirgenmis[-i][-j-1]*cozumkumesi[-j]
+            if indirgenmis[-i][-i-1] != 0:
+                cozumkumesi[-i] = indirgenmis[-i][-1]/indirgenmis[-i][-i-1]
+
+        return cozumkumesi
+
+    elif rankKatsayilar < rankSabitler:
+        return False
+
+    elif rankKatsayilar > rankSabitler:
+        return True
 
                
 def cramer(katsayilar, sabitler):
