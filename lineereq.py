@@ -36,11 +36,15 @@ def gauss_elemination(katsayilar, sabitler):
     rankSabitler = 0
     
     for i in range(katsayilar.m):
-        if 0 not in indirgenmis[i][:katsayilar.m]:
-            rankKatsayilar +=1
+        for j in indirgenmis[i][:katsayilar.m]:
+            if j != 0:
+                rankKatsayilar +=1
+                break 
+
         if 0 != indirgenmis[i][-1]:
             rankSabitler +=1
 
+            
     if rankKatsayilar == rankSabitler:
         for i in range(1,katsayilar.m+1):
             for j in range(1, katsayilar.m+1):
