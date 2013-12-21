@@ -1,5 +1,8 @@
 from lineereq import *
 
+print "cramer v0.1"
+print " "
+
 print "Katsayýlar matrisini,",
 katsayilar = Matris.readStdin()
 print "Sabitler matrisini her elemandan sonra entera basarak giriniz. Bitirmek için B yazýnýz."

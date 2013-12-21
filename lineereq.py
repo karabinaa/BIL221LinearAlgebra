@@ -23,7 +23,10 @@ def ekMatrisOlustur(katsayilar, sabitler):
 
 def indirge(matris):
     for i in range(matris.m):
-        temp = satircarpma(copy.deepcopy(matris[i]), Fraction(1,matris[i][i])) 
+        if 0 != matris[i][i]:
+            temp = satircarpma(copy.deepcopy(matris[i]), Fraction(1,matris[i][i]))
+        else:
+            temp = matris[i][i]
         for j in range(i+1, matris.m):
             matris = elementercikarma(matris, j, satircarpma(temp, matris[j][i]))
     return matris
